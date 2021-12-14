@@ -1,0 +1,96 @@
+/* Main Stylesheet for this app */
+:root {
+  --error: #b30303;
+}
+
+body {
+  font-family: sans-serif !important;
+}
+
+.mainContainer {
+  width: 100%;
+  padding: 8px;
+  position: relative;
+  float: left;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.sideBar {
+  position: relative;
+  border: 1px solid #eeeeee;
+  box-shadow: -1px 1px 2px #eeeeee;
+  border-radius: 12px;
+  width: 19%;
+  min-height: 100vh;
+  transition: all 0.35s;
+}
+
+.detailPane {
+  position: relative;
+  width: 95%;
+  height: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  transition: all 0.25s;
+}
+
+.hide {
+  opacity: 0;
+}
+
+.show {
+  opacity: 1;
+}
+
+.formToggleHide {
+  display: none;
+}
+
+.formToggleShow {
+  display: block;
+}
+
+.customLabel {
+  background-color: #eeeeee80;
+  width: 100%;
+  color: #505050;
+  border-radius: 14px 14px 0px 0px;
+  padding-left: 14px;
+  padding: 4px 6px 4px 6px;
+  font-size: 14px;
+  margin-bottom: 0px !important;
+}
+
+.customInput {
+  width: 100%;
+  padding: 5px 2px 2px 8px;
+  color: #007bff;
+  font-size: 12px;
+  margin-bottom: 10px !important;
+  border: 1px solid #dddddd !important;
+  outline: 0 !important;
+  min-height: 29px;
+  border-radius: 0 0 4px 4px;
+}
+
+button {
+  font-size: 12px !important;
+}
+
+.rdt .form-control {
+  padding: 0.375rem 0.5rem;
+  font-size: 12px;
+  color: #007bff;
+}
+
+.search-wrapper > .chip {
+  margin: 0;
+}
+
+.error {
+  border: 2px solid var(--error) !important;
+}

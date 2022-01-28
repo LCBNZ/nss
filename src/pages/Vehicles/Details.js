@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CursorClickIcon } from "@heroicons/react/solid";
 import { Link, useParams, useLocation, useHistory } from "react-router-dom";
+import GoogleMapReact from 'google-map-react';
 import { VehiclesApi } from "../../api";
 
 import { TwoColumnDetails, Section } from "../../common/Details";
@@ -16,6 +17,8 @@ export const VehicleDetails = () => {
   const history = useHistory();
 
   const vehicleQuery = VehiclesApi.useFetchVehicle(vehicleId);
+
+  const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
   const items = [
     { label: "Admin Files", id: 0 },
@@ -54,10 +57,28 @@ export const VehicleDetails = () => {
         <Section title="Binders" content={vehicleQuery?.data?.number_binders || ""} />
         <Section title="Strops" content={vehicleQuery?.data?.number_strops || ""} />
         <Section title="Heavy Truck" content={vehicleQuery?.data?.heavy_truck || ""} />
+        <Section title="Location" content={vehicleQuery?.data?.location.address || ""} />
       </TwoColumnDetails>
 
       <div className="px-8">
         <Tabs tabIndex={tabIndex} setTabIndex={setTabIndex} tabs={items} />
+      </div>
+
+      <div className="px-8">
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: "AIzaSyCHwFlTb_APiJb-wgYC0v1cBkjEuBmXOOo" }}
+          defaultCenter={{
+            lat: vehicleQuery?.data?.location.latitude,
+            lng: vehicleQuery?.data?.location.longitude
+          }}
+          defaultZoom={11}
+        >
+          <AnyReactComponent
+            lat={vehicleQuery?.data?.location.latitude}
+            lng={vehicleQuery?.data?.location.longitude}
+            text="Vehicle"
+          />
+        </GoogleMapReact>
       </div>
 
       {tabIndex === 0 && (

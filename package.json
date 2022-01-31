@@ -24,6 +24,7 @@
     "flatpickr": "^4.6.9",
     "formik": "^2.2.9",
     "intersection-observer": "^0.12.0",
+    "leaflet": "1.7.1",
     "moment": "^2.29.1",
     "moment-business-days": "^1.2.0",
     "postcss": "^7",
@@ -36,6 +37,7 @@
     "react-dropzone": "^11.4.2",
     "react-flatpickr": "^3.10.7",
     "react-hook-form": "^7.12.2",
+    "react-leaflet": "3.2.5",
     "react-query": "^3.19.1",
     "react-redux": "^7.2.5",
     "react-redux-toastr": "^7.6.5",
@@ -67,18 +69,11 @@
       "react-app/jest"
     ]
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
   "devDependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",

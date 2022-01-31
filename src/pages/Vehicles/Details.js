@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { CursorClickIcon } from "@heroicons/react/solid";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Icon } from "leaflet";
+import "leaflet/dist/leaflet.css"
 import { Link, useParams, useLocation, useHistory } from "react-router-dom";
-import GoogleMapReact from 'google-map-react';
 import { VehiclesApi } from "../../api";
-
 import { TwoColumnDetails, Section } from "../../common/Details";
 import { Spinner, Tabs } from "../../common";
 import { FileList } from "../../components/Files";
@@ -18,7 +19,10 @@ export const VehicleDetails = () => {
 
   const vehicleQuery = VehiclesApi.useFetchVehicle(vehicleId);
 
-  const AnyReactComponent = ({ text }) => <div>{text}</div>;
+  const vehicleIconMap = new Icon({
+    iconUrl:'/marker.svg',
+    iconSize:[40,40]
+  })
 
   const items = [
     { label: "Admin Files", id: 0 },
@@ -60,25 +64,24 @@ export const VehicleDetails = () => {
         <Section title="Location" content={vehicleQuery?.data?.location.address || ""} />
       </TwoColumnDetails>
 
-      <div className="px-8">
-        <Tabs tabIndex={tabIndex} setTabIndex={setTabIndex} tabs={items} />
-      </div>
+      <MapContainer
+        style={{ height: "40vh", width: "100%" }}
+        center={[vehicleQuery?.data?.location.latitude, vehicleQuery?.data?.location.longitude]}
+        zoom="75" >
+        <TileLayer
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <Marker icon={vehicleIconMap} position={[vehicleQuery?.data?.location.latitude, vehicleQuery?.data?.location.longitude]}>
+          <Popup>
+            Vehicle
+          </Popup>
+        </Marker>
+
+      </MapContainer>
+
 
       <div className="px-8">
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyCHwFlTb_APiJb-wgYC0v1cBkjEuBmXOOo" }}
-          defaultCenter={{
-            lat: vehicleQuery?.data?.location.latitude,
-            lng: vehicleQuery?.data?.location.longitude
-          }}
-          defaultZoom={11}
-        >
-          <AnyReactComponent
-            lat={vehicleQuery?.data?.location.latitude}
-            lng={vehicleQuery?.data?.location.longitude}
-            text="Vehicle"
-          />
-        </GoogleMapReact>
+        <Tabs tabIndex={tabIndex} setTabIndex={setTabIndex} tabs={items} />
       </div>
 
       {tabIndex === 0 && (
